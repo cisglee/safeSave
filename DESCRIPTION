@@ -1,0 +1,18 @@
+Package: safeSave
+Type: Package
+Title: Find a File or Folder Name That Does Not Already Exist
+Version: 0.1.0
+Author: Colin I.S.G. Lee
+Maintainer: Colin I.S.G. Lee <clee@rsm.nl>
+Description: Small tool consisting of a single function that helps you find a file or
+    folder name that does not already exist
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    here
