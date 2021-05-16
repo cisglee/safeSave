@@ -1,13 +1,3 @@
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
-
 # safeSave
 
 <!-- badges: start -->
@@ -38,10 +28,24 @@ install_github("cisglee/safeSave")
 
 ## Example
 
-Here is a quick example of how this tool can be used:
+Here is a quick example of how this tool can be used for file paths:
 
 ```{r example}
 library(safeSave)
-dir_path <- find_safe_path(file.path("path", "to"), is_dir=TRUE, create=TRUE)  # Create a folder, first ensuring that it does not already exist
-file_path <- find_safe_path(file.path("path", "to", "file", "data.rds"))  # Check whether there is a file "data.rds" in the specified folder and get a non-existent file name if it does already exist
+
+# Example 1: Check whether there is a file called "data.rds" with the specified
+# file path. If the file already exists, add a prefix to get a file name that 
+# does not yet exist.
+fp <- file.path("path", "to", "file", "data.rds")
+file_path <- find_safe_path(fp)
+```
+
+And here is an example for its use with a directory:
+
+```{r example}
+library(safeSave)
+
+# Example 2: Create a new directory, first ensuring that it does not already exist
+dp <- file.path("path", "to", "directory")
+dir_path <- find_safe_path(dp, is_dir=TRUE, create=TRUE)
 ```
