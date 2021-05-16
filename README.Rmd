@@ -30,10 +30,10 @@ if the latter does not already exist.
 ## Installation
 
 You can install the released version of safeSave from 
-[CRAN](https://CRAN.R-project.org) with:
+GitHub with:
 
 ``` r
-install.packages("safeSave")
+install_github("cisglee/safeSave")
 ```
 
 ## Example
