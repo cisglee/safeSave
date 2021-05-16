@@ -30,7 +30,7 @@
 #'
 #' @return non-existent path equal to or based on the specified file path
 #'
-#' @example
+#' @examples
 #' dir_path <- find_safe_path(file.path("path", "to"), is_dir=TRUE, create=TRUE)  # Create a folder, first ensuring that it does not already exist
 #' file_path <- find_safe_path(file.path("path", "to", "file", "data.rds"))  # Check whether there is a file "data.rds" in the specified folder and get a non-existent file name if it does
 #'
