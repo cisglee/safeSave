@@ -26,26 +26,54 @@ GitHub with:
 install_github("cisglee/safeSave")
 ```
 
-## Example
+## Examples
 
-Here is a quick example of how this tool can be used for file paths:
+Here are a few examples of how this tool can be used. 
+
+# File Path
+For a file path, the function \code{find_safe_path} checks whether there 
+is a file called \code{data.rds} with the specified file path:
 
 ```{r example}
 library(safeSave)
-
-# Example 1: Check whether there is a file called "data.rds" with the specified
-# file path. If the file already exists, add a prefix to get a file name that 
-# does not yet exist.
+ 
 fp <- file.path("path", "to", "file", "data.rds")
 file_path <- find_safe_path(fp)
 ```
+If \code{data.rds} does not exist, the original file path is returned.
+If it does exist, a prefix is added until a non-existent file name is 
+found. The prefix starts at 1 and increments. For example, 
+\code{data.rds} can become \code{data (1).rds}, \code{data (2).rds} 
+etc.
 
-And here is an example for its use with a directory:
+If the folder in which the file is placed might still need to be 
+created, this can be specified by setting the \code{create_folder} 
+parameter to \code{TRUE}:
+```{r example}
+library(safeSave)
+ 
+fp <- file.path("path", "to", "file", "data.rds")
+file_path <- find_safe_path(fp, create_folder=TRUE)
+```
+
+# Directory Path
+And here is an example for the use of the function with a directory:
 
 ```{r example}
 library(safeSave)
 
-# Example 2: Create a new directory, first ensuring that it does not already exist
 dp <- file.path("path", "to", "directory")
-dir_path <- find_safe_path(dp, is_dir=TRUE, create=TRUE)
+dir_path <- find_safe_path(
+    dp,
+    is_dir=TRUE,
+    create=TRUE,
+    recursive=TRUE
+)
 ```
+Here \code{find_safe_path} checks whether the directory 
+\code{directory} exists and, if it does not, it creates this directory.
+Since recursive is set to \code{TRUE} any non-existent parent 
+directories are created as well. If the directory does exist, a suffix
+is added until a non-existent directory name is found. Naming is
+similar to that of a file - i.e., \code{directory} can become 
+\code{directory (1)} or \code{directory (2)} etc. 
