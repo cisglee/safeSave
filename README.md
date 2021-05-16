@@ -30,7 +30,7 @@ install_github("cisglee/safeSave")
 
 Here are a few examples of how this tool can be used. 
 
-# File Path
+### File Path
 For a file path, the function \code{find_safe_path} checks whether there 
 is a file called \code{data.rds} with the specified file path:
 
@@ -56,7 +56,7 @@ fp <- file.path("path", "to", "file", "data.rds")
 file_path <- find_safe_path(fp, create_folder=TRUE)
 ```
 
-# Directory Path
+### Directory Path
 And here is an example for the use of the function with a directory:
 
 ```{r example}
