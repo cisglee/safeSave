@@ -38,33 +38,45 @@
 find_safe_path <- function(path, is_dir=FALSE, create_folder=FALSE,
                            recursive=TRUE) {
   if (is_dir == FALSE) {
+    # Store the last file extension if it is a path to a file
     ext <- paste(c(".", tools::file_ext(path)), collapse="")
+    # And store the path excluding the file extension
     path_wo_ext <- tools::file_path_sans_ext(path)
   } else {
+    # Store an empty file extension if it is a path to a directory
     ext <- ""
     path_wo_ext <- path
   }
 
   i <- 0
   while (1) {
-    if (i > 0) {
-      temp_path <- file.path(paste(c(path_wo_ext, " (", i, ")", ext), collapse=""))
-    } else {
+    if (i == 0) {
       temp_path <- file.path(path)
+    } else {
+      # If this is not the first iteration, add prefix i to path
+      temp_path <- file.path(
+        paste(c(path_wo_ext, " (", i, ")", ext), collapse="")
+      )
     }
     if ((file.exists(temp_path) && is_dir==FALSE) || (dir.exists(temp_path) && is_dir==TRUE)) {
+      # If the file or folder exists, increment i and run the while loop again
       i <- i + 1
     } else {
+      # If the file or folder does not exist, we have found our path and break
       path <- temp_path
       break
     }
   }
 
   if (create_folder == TRUE) {
+    # Create folder if create_folder == TRUE
     if (is_dir == FALSE && dir.exists(dirname(path)) == FALSE) {
-      dir.create(dirname(path))
+      # If it is a file path, the parent folder is/folder are created
+      dir.create(dirname(path), recursive=recursive)
     } else if (is_dir == TRUE && dir.exists(path) == FALSE) {
-      dir.create(path)
+      # If it is a directory, the directory itself is created, including any
+      # non-existent parent directories if recursive == TRUE
+      dir.create(path, recursive=recursive)
     }
   }
 

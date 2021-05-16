@@ -1,10 +1,9 @@
-# Initialize path to use for tests
-#path_to_self <- file.path(here::here(), 'tests', 'testthat', 'test-utils-safe_save.R')
-path_to_self <- file.path(".", 'tests', 'testthat', 'test-utils-safe_save.R')
-
 context("safe_save")
 
-# Run test for file paths
+# Initialize path to use for tests
+path_to_self <- file.path(here::here(), 'tests', 'testthat', 'safe_save.R')
+
+#### Run test for file paths
 testthat::test_that("Test whether the utility safe_save is able to find a unique file path to this test file", {
   safe_path_to_self <- find_safe_path(
     path_to_self,
@@ -15,7 +14,7 @@ testthat::test_that("Test whether the utility safe_save is able to find a unique
   testthat::expect_identical(file_name_wo_ext, "test-utils-safe_save (1)")
 })
 
-# Run test for directory paths
+#### Run test for directory paths
 testthat::test_that("Test whether the utility safe_save is able to find a unique folder name", {
   path_to_dir <- dirname(path_to_self)
   safe_path_to_self <- find_safe_path(
@@ -27,7 +26,7 @@ testthat::test_that("Test whether the utility safe_save is able to find a unique
   testthat::expect_identical(dir_name_wo_ext, "testthat (1)")
 })
 
-# Run tests for creating folder
+#### Run tests for creating folder
 testthat::test_that("Test whether the utility safe_save is able to create a folder in the project directory", {
   path_to_test_dir <- file.path(here::here(), '.testfolder')
   safe_path_to_folder <- find_safe_path(
